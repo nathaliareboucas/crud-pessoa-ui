@@ -13,6 +13,10 @@ import { TableModule } from 'primeng/components/table/table';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
 import { PessoaListagemComponent } from './pessoa-listagem/pessoa-listagem.component';
+import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import {GrowlModule} from 'primeng/components/growl/growl'
+import {MessageService} from 'primeng/components/common/messageservice';
+
 
 @NgModule({
   imports: [
@@ -29,11 +33,12 @@ import { PessoaListagemComponent } from './pessoa-listagem/pessoa-listagem.compo
     TableModule,
     TooltipModule,
     ConfirmDialogModule,
+    GrowlModule
   ],
-  declarations: [PessoaListagemComponent],
+  declarations: [PessoaListagemComponent, PessoaCadastroComponent],
   exports: [PessoaListagemComponent],
   providers: [
-
+    MessageService
   ]
 })
 export class PessoaModule { }

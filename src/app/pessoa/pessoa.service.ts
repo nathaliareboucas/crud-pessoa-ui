@@ -27,4 +27,12 @@ export class PessoaService {
     return resp
   }
 
+  buscarPorId(id: number) {
+    return this.http.get(`${PESSOA_API}/${id}`)
+  }
+
+  salvar(pessoa: Pessoa) {
+    return this.http.post(`${PESSOA_API}/pessoas`, pessoa)
+  }
+
 }

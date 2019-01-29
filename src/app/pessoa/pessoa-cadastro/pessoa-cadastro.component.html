@@ -1,0 +1,80 @@
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid">
+    <form autocomplete="off" #frm="ngForm" (ngSubmit)="salvar(frm)">
+      <p-growl></p-growl>
+      <p-panel header="{{editando() ? 'Atualização de' : 'Cadastro de'}} pessoa">
+        <div class="ui-g">
+          <div class="ui-g-4">
+            <label>Nome:</label><br>
+            <input pInputText type="text" style="width:100%" name="nome" required [(ngModel)]="pessoa.nome" />
+          </div>
+          <div class="ui-g-4">
+            <label>CPF:</label><br>
+            <p-inputMask mask="999.999.999-99" name="cpf" required [(ngModel)]="pessoa.cpf"></p-inputMask>
+          </div>
+        </div>
+
+        <div class="ui-g">
+          <div class="ui-g-4">
+            <label>E-mail:</label><br>
+            <input pInputText type="email" name="email" required email [(ngModel)]="pessoa.email" />
+          </div>
+          <div class="ui-g-4">
+            <label>Data de nacimento:</label><br>
+            <p-inputMask mask="99/99/9999" name="dataNascimento" required [(ngModel)]="pessoa.dataNascimento"></p-inputMask>
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="ui-g">
+          <div class="ui-g-1">
+            <label>DDD:</label><br>
+            <p-inputMask mask="99" id="ddd" name="ddd" [(ngModel)]="telefone.ddd"></p-inputMask>
+          </div>
+          <div class="ui-g-3">
+            <label>Telefone:</label><br>
+            <p-inputMask mask="9.9999-9999" name="telefone" [(ngModel)]="telefone.numero"></p-inputMask>
+          </div>
+          <div class="ui-g-2">
+            <button pButton type="button" label="Adicionar" style="margin-top:19px" icon="pi pi-plus-circle" (click)="adicionarTelefone()"
+              [disabled]="validaTelefone()"></button>
+          </div>
+        </div>
+
+        <div class="ui-g">
+          <p-table [value]="pessoa.telefones" [responsive]="true">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>DDD</th>
+                <th>Telefone</th>
+                <th class="col-acoes">Ações</th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-tel let-t="rowIndex">
+              <tr>
+                <td>{{tel.ddd}}</td>
+                <td>{{tel.numero}}</td>
+                <td class="col-acoes">
+                  <button pButton type="button" icon="pi pi-times" pTooltip="Deletar" (click)="deletarTelefone(t)"></button>
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <tr>
+                <td colspan="3">Nenhum telefone adicionado.</td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+        <div class="ui-g ui-fluid">
+          <div class="ui-g-2">
+              <p-button label="Salvar" icon="pi pi-save" iconPos="left" [disabled]="!frm.valid || camposInvalidos"></p-button>
+          </div>
+        </div>
+      </p-panel>
+    </form>
+  </div>
+</div>

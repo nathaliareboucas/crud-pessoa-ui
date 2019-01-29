@@ -30,14 +30,12 @@ export class PessoaListagemComponent implements OnInit {
     this.pessoaService.pessoas(this.filtro)
       .subscribe(
         data => {
-          console.log(data);
           this.pessoas = data['content']
           this.qtdRegistros = data['totalElements']
         },
         (error) =>{
-          console.log(error.error.message) //erro => this.errorHandlerService.handle(erro));
-        }
-      );
+          console.log(error.error.message);
+        });
   }
 
   loadPessoaLazy(event: LazyLoadEvent) {
