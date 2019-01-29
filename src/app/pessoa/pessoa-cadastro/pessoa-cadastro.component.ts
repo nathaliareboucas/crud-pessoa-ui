@@ -91,7 +91,7 @@ export class PessoaCadastroComponent implements OnInit {
   }
 
   editando() {
-    return this.pessoa.id !== null;
+    return this.pessoa.id !== undefined;
   }
 
   validaCampos() {
