@@ -1,8 +1,14 @@
 <div class="ui-g">
   <div class="ui-g-12">
+      <p-growl></p-growl>
+      <p-confirmDialog header="Confirmação" icon="pi pi-question-circle" #confirmacao>
+        <p-footer>
+          <button type="button" pButton icon="pi pi-check" label="Sim" (click)="confirmacao.accept()"></button>
+          <button type="button" pButton icon="pi pi-times" label="Não" (click)="confirmacao.reject()"></button>
+        </p-footer>
+      </p-confirmDialog>
 
     <p-panel header="Listagem de pessoas">
-
       <form #f="ngForm" (ngSubmit)="pesquisar()" novalidate>
         <div class="ui-g">
           <div class="ui-g-12 ui-md-6 ui-lg-2">
@@ -36,25 +42,23 @@
             (onLazyLoad)="loadPessoaLazy($event)" #tabela >
             <ng-template pTemplate="header">
               <tr>
+                <th>Id</th>
                 <th>Nome</th>
                 <th>E-mail</th>
-                <th>CPF</th>
-                <th>Idade</th>
-                <th>Qtd. Telefones</th>
+                <th>CPF</th>               
                 <th class="col-acoes">Ações</th>
               </tr>
             </ng-template>
 
             <ng-template pTemplate="body" let-pessoa>
               <tr>
+                <td>{{pessoa.id}}</td>
                 <td>{{pessoa.nome}}</td>
                 <td>{{pessoa.email}}</td>
-                <td>{{pessoa.cpf}}</td>
-                <td>{{pessoa.idade}}</td>
-                <td>{{pessoa.quantidadeTelefones}}</td>
+                <td>{{pessoa.cpf}}</td>              
                 <td class="col-acoes">
                   <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="left" [routerLink]="['/pessoas', pessoa.id]"></a>
-                  <button pButton icon="pi pi-times" style="margin-left: 5px;" pTooltip="Deletar" (click)="confirmarDeletar(pessoa)"></button>
+                  <button pButton icon="pi pi-times" style="margin-left: 5px;" pTooltip="Deletar" (click)="confirmacaoDelete(pessoa)"></button>
                 </td>
               </tr>
             </ng-template>

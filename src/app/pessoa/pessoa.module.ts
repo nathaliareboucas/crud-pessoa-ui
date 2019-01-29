@@ -11,11 +11,12 @@ import { InputMaskModule } from 'primeng/components/inputmask/inputmask';
 import { ButtonModule } from 'primeng/components/button/button';
 import { TableModule } from 'primeng/components/table/table';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
-import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
 import { PessoaListagemComponent } from './pessoa-listagem/pessoa-listagem.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import {GrowlModule} from 'primeng/components/growl/growl'
 import {MessageService} from 'primeng/components/common/messageservice';
+import { ConfirmDialogModule } from 'primeng/components/confirmdialog/confirmdialog';
+import { ConfirmationService } from 'primeng/components/common/api';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import {MessageService} from 'primeng/components/common/messageservice';
   declarations: [PessoaListagemComponent, PessoaCadastroComponent],
   exports: [PessoaListagemComponent],
   providers: [
-    MessageService
+    MessageService, ConfirmationService
   ]
 })
 export class PessoaModule { }

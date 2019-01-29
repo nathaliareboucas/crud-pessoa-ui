@@ -6,5 +6,6 @@ import { PessoaCadastroComponent } from './pessoa/pessoa-cadastro/pessoa-cadastr
 export const ROUTES: Routes = [
     { path: '', component: PessoaListagemComponent },
     { path: 'pessoas', component: PessoaListagemComponent },
-    {path: 'cadastro', component: PessoaCadastroComponent}
+    { path: 'pessoas/:id', component: PessoaCadastroComponent },
+    { path: 'cadastro', component: PessoaCadastroComponent}
 ]

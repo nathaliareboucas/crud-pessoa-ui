@@ -27,12 +27,22 @@ export class PessoaService {
     return resp
   }
 
-  buscarPorId(id: number) {
-    return this.http.get(`${PESSOA_API}/${id}`)
+  buscarPorId(id: number) {    
+    return this.http.get(`${PESSOA_API}/pessoas/${id}`)
   }
-
+  
   salvar(pessoa: Pessoa) {
     return this.http.post(`${PESSOA_API}/pessoas`, pessoa)
   }
+
+  atualizar(pessoa: Pessoa) {
+    const params = new HttpParams().set('id', pessoa.id.toString())
+    return this.http.put(`${PESSOA_API}/pessoas`, { params: params })      
+  }
+
+  deletar(id: number) {    
+    return this.http.delete(`${PESSOA_API}/pessoas/${id}`)     
+  }
+
 
 }

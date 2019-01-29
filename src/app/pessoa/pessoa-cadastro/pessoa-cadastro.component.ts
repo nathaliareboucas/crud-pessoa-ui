@@ -17,16 +17,16 @@ import { MessageService } from 'primeng/components/common/api';
 export class PessoaCadastroComponent implements OnInit {
 
   telefone: Telefone
-  pessoa: Pessoa;
+  pessoa: Pessoa;  
 
   constructor(private pessoaService: PessoaService,
-    private route: ActivatedRoute,
-    private messageService: MessageService) { }
+              private route: ActivatedRoute,
+              private messageService: MessageService) { }
 
   ngOnInit() {
     const idPessoa = this.route.snapshot.params['id'];
-
-    if (idPessoa) {
+    
+    if (idPessoa) {      
       this.buscarPorId(idPessoa);
     }
 
@@ -36,12 +36,12 @@ export class PessoaCadastroComponent implements OnInit {
 
   buscarPorId(id: number) {
     this.pessoaService.buscarPorId(id)
-      .subscribe(
+      .subscribe(       
         data => {
-          this.pessoa = data['content']
+          this.pessoa = data['content']          
         },
         (error) => {
-          console.log(error.error.message) //erro => this.errorHandlerService.handle(erro));
+          console.log(error.error.message) 
         }
       );
   }
@@ -57,34 +57,41 @@ export class PessoaCadastroComponent implements OnInit {
 
   salvar(form: FormControl) {
     if (this.editando()) {
-      //  this.atualizar(form);
+      this.atualizar(form);
     } else {
       this.cadastrar(form);
     }
   }
 
   cadastrar(form: FormControl) {
-    this.pessoaService.salvar(this.pessoa)
-      .subscribe(
+    this.pessoaService.salvar(this.pessoa)    
+    .subscribe(
         data => {
           this.messageService.add({ severity: 'success', detail: 'Salvo com sucesso.' });
           form.reset();
           this.pessoa = new Pessoa();
         },
         (error) => {
-          console.error()
-            // `Backend returned code ${error.status}, ` +
-            // `body was: ${error.error}`);
-
-          // this.messageService.add({ severity: 'error', detail: error.error.message });
+          console.error(`${error.status}, ` + `${error.error}`)
+           this.messageService.add({ severity: 'error', detail: `Erro ao salvar.` });
         }
       );
   }
 
-
+  atualizar(form: FormControl) {
+    this.pessoaService.atualizar(this.pessoa)
+      .subscribe(
+        data => {
+          this.messageService.add({ severity: 'success', detail: 'Pessoa atualizada com sucesso.' });
+        }, (error) => {
+          console.error(`${error.status}, ` + `${error.error}`)
+          this.messageService.add({ severity: 'error', detail: 'Erro ao salvar.' });
+        }
+      );
+  }
 
   editando() {
-    return this.pessoa.id !== undefined;
+    return this.pessoa.id !== null;
   }
 
   validaCampos() {

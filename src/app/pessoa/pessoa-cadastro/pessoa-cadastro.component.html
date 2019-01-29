@@ -2,7 +2,7 @@
   <div class="ui-g-12 ui-fluid">
     <form autocomplete="off" #frm="ngForm" (ngSubmit)="salvar(frm)">
       <p-growl></p-growl>
-      <p-panel header="{{editando() ? 'Atualização de' : 'Cadastro de'}} pessoa">
+      <p-panel header="{{editando ? 'Atualização de' : 'Cadastro de'}} pessoa">
         <div class="ui-g">
           <div class="ui-g-4">
             <label>Nome:</label><br>
@@ -69,8 +69,8 @@
           </p-table>
         </div>
 
-        <div class="ui-g ui-fluid">
-          <div class="ui-g-2">
+        <div class="ui-g-3">
+          <div class="ui-g-3 ui-fluid">
               <p-button label="Salvar" icon="pi pi-save" iconPos="left" [disabled]="!frm.valid || camposInvalidos"></p-button>
           </div>
         </div>
